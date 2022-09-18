@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Canvas, Scale, messagebox, ttk, DoubleVar
+from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringVar
 import numpy as np 
 import matplotlib.pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -23,28 +23,44 @@ class Window:
       self.root.title("Tarea Fourier")
       self.root.geometry('1300x800')
       self.amplitud =  DoubleVar()
+      self.name_function =  StringVar(value="Escalon")
     
 
       
       tkinter.Label(self.root, text= "Complemento de matemática \nEspecializacion en Optoelectronica \n Universidad de Buenos Aires").grid(row=1, column=0, columnspan=6, padx=5, pady=5)
       tkinter.Label(self.root, text=  "Rafael Santiago Campo Serrano").grid(row=2, column=0, columnspan=6, padx=5, pady=5)
-
       tkinter.Label(self.root,text="Número de coeficientes de expansion").grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
        
       #tkinter.Entry(self.root,bg='black',fg='white',bd=5).grid(row=3, column=1,  padx=5, pady=5)
-      self.escala=tkinter.Scale(self.root,from_=0, to=100,tickinterval=5,length=1000,
-      orient= tkinter.HORIZONTAL,  command=self.update_value, variable=self.amplitud)
+
+      self.escala=tkinter.Scale(self.root,
+                                from_=1,
+                                to=101,
+                                tickinterval=5,
+                                length=1000,
+                                orient= tkinter.HORIZONTAL,  
+                                command=self.update_value, 
+                                variable=self.amplitud
+                                )
+
+      self.label_coef= tkinter.Label(self.root,text="Número de coeficientes de expansion")
+
+      self.function_menu = ttk.Combobox(self.root,
+                                        state="readonly",
+                                        values=["Escalon","Sierra","Triangulo"], 
+                                        textvariable=self.name_function
+      )
+      self.button=tkinter.Button(self.root,text="Actualizar grafico", command=self.update_function)
+      self.button_qa=tkinter.Button(bitmap="question")
+
+
+ 
+
       self.escala = self.escala.grid(row=3, column=2,columnspan=5,  padx=5, pady=5)
-
-      tkinter.Label(self.root,text="Número de coeficientes de expansion").grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
-
-      ttk.Combobox(
-        state="readonly",
-        values=["Escalon","Sierra","Triangulo"]
-      ).grid(row=4, column=3, columnspan=2)
-
-      tkinter.Button(self.root,text="Actualizar grafico").grid(row=4,column=5,  padx=5, pady=5)
-      
+      self.label_coef=self.label_coef.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
+      self.function_menu=self.function_menu.grid(row=4, column=3, columnspan=2)
+      self.button=self.button.grid(row=4,column=5,  padx=5, pady=5)
+      self.button_qa=self.button_qa.grid(row=4,column=2)
       
 
 
@@ -58,8 +74,12 @@ class Window:
       self.fig_error.clear()
       self.fig_fourier.clear()
       self.plot_values()
+      
       print(f"\n{algo} El nuervo valor de la amplitud es: {self.amplitud.get()} \n")
       print(self.amplitud.get()) 
+
+    def update_function(self ):
+      print(f" {self.name_function.get()}" )
        
        
 
@@ -101,7 +121,7 @@ class Window:
         canvas_fourier = FigureCanvasTkAgg(self.fig_error, self.root)
         canvas_fourier.draw()
         canvas_fourier.get_tk_widget().grid(row=6, column=3,columnspan=3, sticky=tkinter.E )
-        
+        ##To do: Necesito hacer que esta funcion sea mas simple. se puede usar un unico canvas y en lugar de eso plotearlo por aparte 
         return canvas_fourier
 
 
