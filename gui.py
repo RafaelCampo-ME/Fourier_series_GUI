@@ -24,6 +24,7 @@ class Window:
       self.root.geometry('1300x800')
       self.amplitud =  DoubleVar()
       self.name_function =  StringVar(value="Escalon")
+      self.eq_expression =  StringVar(value="|x|/x")
     
 
       
@@ -53,19 +54,18 @@ class Window:
       )
       self.button=tkinter.Button(self.root,text="Actualizar grafico", command=self.update_function)
       self.button_qa=tkinter.Button(bitmap="question", command=self.information_popup)
+      self.eq_label=tkinter.Label(self.root, textvariable=self.eq_expression, text= f"La ecuacion es: {self.eq_expression}")
 
      
       ##Definig the position in the grid of every widgets
       self.label_coef=self.label_coef.grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.escala = self.escala.grid(row=3, column=1,columnspan=5,  padx=5, pady=5)
-      
-
       self.label_function_type= self.label_function_type.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.function_menu=self.function_menu.grid(row=4, column=1, columnspan=2, sticky=tkinter.W)
-
       self.button=self.button.grid(row=4,column=3,  padx=5, pady=5, sticky=tkinter.W)
-
       self.button_qa=self.button_qa.grid(row=4,column=5, sticky=tkinter.W)
+      self.eq_label = self.eq_label.grid(row=7, column=0)
+
       
 
 
@@ -83,6 +83,7 @@ class Window:
       print(self.amplitud.get()) 
 
     def update_function(self ):
+      print(f" {self.eq_expression.get()}" )
       print(f" {self.name_function.get()}" )
        
     def information_popup(self):
