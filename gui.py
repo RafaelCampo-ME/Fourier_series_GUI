@@ -29,7 +29,7 @@ class Window:
       
       tkinter.Label(self.root, text= "Complemento de matemática \nEspecializacion en Optoelectronica \n Universidad de Buenos Aires").grid(row=1, column=0, columnspan=6, padx=5, pady=5)
       tkinter.Label(self.root, text=  "Rafael Santiago Campo Serrano").grid(row=2, column=0, columnspan=6, padx=5, pady=5)
-      tkinter.Label(self.root,text="Número de coeficientes de expansion").grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
+      self.label_coef = tkinter.Label(self.root,text="Número de coeficientes de expansion")
        
       #tkinter.Entry(self.root,bg='black',fg='white',bd=5).grid(row=3, column=1,  padx=5, pady=5)
 
@@ -43,31 +43,35 @@ class Window:
                                 variable=self.amplitud
                                 )
 
-      self.label_coef= tkinter.Label(self.root,text="Número de coeficientes de expansion")
+      self.label_function_type= tkinter.Label(self.root,text="Escoja el tipo de grafica")
 
       self.function_menu = ttk.Combobox(self.root,
                                         state="readonly",
                                         values=["Escalon","Sierra","Triangulo"], 
-                                        textvariable=self.name_function
+                                        textvariable=self.name_function, 
+                                        width= 40
       )
       self.button=tkinter.Button(self.root,text="Actualizar grafico", command=self.update_function)
-      self.button_qa=tkinter.Button(bitmap="question")
+      self.button_qa=tkinter.Button(bitmap="question", command=self.information_popup)
 
+     
+      ##Definig the position in the grid of every widgets
+      self.label_coef=self.label_coef.grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
+      self.escala = self.escala.grid(row=3, column=1,columnspan=5,  padx=5, pady=5)
+      
 
- 
+      self.label_function_type= self.label_function_type.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
+      self.function_menu=self.function_menu.grid(row=4, column=1, columnspan=2, sticky=tkinter.W)
 
-      self.escala = self.escala.grid(row=3, column=2,columnspan=5,  padx=5, pady=5)
-      self.label_coef=self.label_coef.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
-      self.function_menu=self.function_menu.grid(row=4, column=3, columnspan=2)
-      self.button=self.button.grid(row=4,column=5,  padx=5, pady=5)
-      self.button_qa=self.button_qa.grid(row=4,column=2)
+      self.button=self.button.grid(row=4,column=3,  padx=5, pady=5, sticky=tkinter.W)
+
+      self.button_qa=self.button_qa.grid(row=4,column=5, sticky=tkinter.W)
       
 
 
       self.plot_values()
       
-      ##messagebox.showinfo(title="Saludos",message="Hola \nEsta es la tarea numero 2 de complementos de matematicas, por favor clickea en 'Aceptar' para continuar" )
-
+      
       return None
 
     def update_value(self,algo):
@@ -81,7 +85,9 @@ class Window:
     def update_function(self ):
       print(f" {self.name_function.get()}" )
        
-       
+    def information_popup(self):
+      return messagebox.showinfo(title="Saludos",message=f"Hola \nEsta es la tarea numero 2 de complementos de matematicas, por favor clickea en 'Aceptar' para continuar " )
+
 
         
     def plot_sin(self ):
@@ -92,7 +98,7 @@ class Window:
 
     def plot_func(self):
       t = np.arange(-1*np.pi,np.pi,0.01) 
-      s=  (t/np.abs(t)) * self.amplitud.get()
+      s=  (t/np.abs(t)) 
       plt.plot(t,s)
 
     def plot_error(self ):
