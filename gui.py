@@ -45,17 +45,42 @@ class Window:
                                 variable=self.amplitud
                                 )
 
-      self.label_function_type= tkinter.Label(self.root,text="Escoja el tipo de grafica")
+      self.label_function_type= tkinter.Label(self.root,
+                                              text="Escoja el tipo de grafica"
+                                              )
+
 
       self.function_menu = ttk.Combobox(self.root,
                                         state="readonly",
                                         values=["Escalon","Sierra","Triangulo"], 
                                         textvariable=self.name_function, 
                                         width= 40
-      )
-      self.button=tkinter.Button(self.root,text="Actualizar grafico", command=self.update_function)
-      self.button_qa=tkinter.Button(bitmap="question", command=self.information_popup)
-      self.eq_label=tkinter.Label(self.root, textvariable=self.eq_expression, text= f"La ecuacion es: {self.eq_expression}")
+                                        )
+
+      self.button_funct=tkinter.Button(self.root,
+                                       text="Actualizar grafico", 
+                                       command=self.update_function
+                                       )
+      
+      self.button_qa=tkinter.Button(bitmap="question", 
+                                    command=self.information_popup
+                                    )
+      
+      self.eq_label=tkinter.Label(self.root, 
+                                  textvariable=self.eq_expression, 
+                                  text= f"La ecuacion es: {self.eq_expression}"
+                                  )
+
+
+      self.label_aprox_function_type = tkinter.Label(self.root,
+                                                     text="Escoje el tipo de aproximacion"
+                                                     )
+
+      
+      self.button_aprox_funct=tkinter.Button(self.root,
+                                             text="Actualizar grafico", 
+                                             #command=self.update_function
+                                             )                      
 
      
       ##Definig the position in the grid of every widgets
@@ -63,17 +88,15 @@ class Window:
       self.escala = self.escala.grid(row=3, column=1,columnspan=5,  padx=5, pady=5)
       self.label_function_type= self.label_function_type.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.function_menu=self.function_menu.grid(row=4, column=1, columnspan=2, sticky=tkinter.W)
-      self.button=self.button.grid(row=4,column=3,  padx=5, pady=5, sticky=tkinter.W)
+      self.button_funct=self.button_funct.grid(row=4,column=3,  padx=5, pady=5, sticky=tkinter.W)
       self.button_qa=self.button_qa.grid(row=4,column=5, sticky=tkinter.W)
       self.eq_label = self.eq_label.grid(row=7, column=0)
 
-      
-
-
       self.plot_values()
       
-      
       return None
+
+
 
     def update_value(self,algo):
       self.fig_error.clear()
@@ -95,7 +118,7 @@ class Window:
 
 
         
-    def plot_sin(self ):
+    def plot_aprox_fourier(self ):
       t = np.arange(-1*np.pi,np.pi,0.01) 
       s=  self.amplitud.get()*np.sin(t)
       plt.plot(t,s)
@@ -131,7 +154,7 @@ class Window:
     def plot_values(self):
 
         self.fig_fourier, ax = plt.subplots()
-        self.plot_sin()
+        self.plot_aprox_fourier()
 
         
         self.plot_func()
