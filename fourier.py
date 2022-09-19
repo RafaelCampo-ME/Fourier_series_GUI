@@ -17,14 +17,14 @@ class Fourier():
 
     def plot_sin(self ):
       t = np.arange(-1*np.pi,np.pi,0.01) 
-      s=  self.amplitud.get()*np.sin(t)
+      s= np.sin(t)
       fig = plt.plot(t,s)
       return fig
        
 
     def plot_cos(self ):
       t = np.arange(-1*np.pi,np.pi,0.01) 
-      s=  self.amplitud.get()*np.cos(t)
+      s=  np.cos(t)
       fig = plt.plot(t,s)
       return fig
       

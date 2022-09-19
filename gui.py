@@ -1,3 +1,4 @@
+from statistics import variance
 import tkinter
 from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringVar
 import numpy as np 
@@ -25,6 +26,7 @@ class Window:
       self.root.geometry('1300x800')
       self.amplitud =  DoubleVar()
       self.name_function =  StringVar(value="Escalon")
+      self.name_aprox_function =  StringVar(value="Seno")
       self.eq_expression =  StringVar(value="|x|/x")
     
 
@@ -75,21 +77,38 @@ class Window:
       self.label_aprox_function_type = tkinter.Label(self.root,
                                                      text="Escoje el tipo de aproximacion"
                                                      )
-
+      self.function_aprox_menu = ttk.Combobox(self.root,
+                                        state="readonly",
+                                        values=["Seno","Coseno"], 
+                                        textvariable=self.name_aprox_function, 
+                                        width= 40
+                                      
+                                        )
       
       self.button_aprox_funct=tkinter.Button(self.root,
                                              text="Actualizar grafico", 
-                                             #command=self.update_function
+                                             command=self.update_function
                                              )                      
 
      
       ##Definig the position in the grid of every widgets
       self.label_coef=self.label_coef.grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.escala = self.escala.grid(row=3, column=1,columnspan=5,  padx=5, pady=5)
+      
+      
+      
       self.label_function_type= self.label_function_type.grid(row=4, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.function_menu=self.function_menu.grid(row=4, column=1, columnspan=2, sticky=tkinter.W)
       self.button_funct=self.button_funct.grid(row=4,column=3,  padx=5, pady=5, sticky=tkinter.W)
-      self.button_qa=self.button_qa.grid(row=4,column=5, sticky=tkinter.W)
+
+      self.label_aprox_function_type = self.label_aprox_function_type.grid(row=4, column=4)
+      self.function_aprox_menu = self.function_aprox_menu.grid(row=4, column=5)
+      self.button_aprox_funct = self.button_aprox_funct.grid(row=4,column=6)
+
+
+
+      self.button_qa=self.button_qa.grid(row=5,column=0, sticky=tkinter.W)
+
       self.eq_label = self.eq_label.grid(row=7, column=0)
 
       self.plot_values()
@@ -101,6 +120,7 @@ class Window:
     def update_value(self,algo):
       self.fig_error.clear()
       self.fig_fourier.clear()
+      self.plot_aprox_fourier()
       self.plot_func()
       self.plot_values()
       
@@ -119,10 +139,16 @@ class Window:
 
         
     def plot_aprox_fourier(self ):
-      t = np.arange(-1*np.pi,np.pi,0.01) 
-      s=  self.amplitud.get()*np.sin(t)
-      plt.plot(t,s)
-      
+      fourier_aprox = Fourier()
+      variable = self.name_aprox_function.get()
+      if variable == 'Seno':
+        fourier_aprox.plot_sin()
+      else:
+        fourier_aprox.plot_cos()
+
+
+       
+
 
     def plot_func(self):
       fourier=Fourier()
