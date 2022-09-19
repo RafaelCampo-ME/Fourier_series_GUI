@@ -3,6 +3,7 @@ from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringV
 import numpy as np 
 import matplotlib.pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from fourier import Fourier
 
  
 
@@ -77,12 +78,15 @@ class Window:
     def update_value(self,algo):
       self.fig_error.clear()
       self.fig_fourier.clear()
+      self.plot_func()
       self.plot_values()
       
       print(f"\n{algo} El nuervo valor de la amplitud es: {self.amplitud.get()} \n")
       print(self.amplitud.get()) 
 
     def update_function(self ):
+      self.plot_func()
+      self.plot_values()
       print(f" {self.eq_expression.get()}" )
       print(f" {self.name_function.get()}" )
        
@@ -98,11 +102,22 @@ class Window:
       
 
     def plot_func(self):
-      t=np.arange(-1*np.pi,np.pi,0.01)
-       
-      s=  (t/np.abs(t)) 
-      
-      plt.plot(t,s)
+      fourier=Fourier()
+      variable = self.name_function.get()
+      print(f"La variable cambiada es: {variable}" )
+      if variable == "Escalon":
+        fourier.plot_func()
+        print(f"Funcion ploteada escalon")
+      elif variable == "Triangulo":
+        fourier.func_triangle()
+        print(f"Funcion ploteada triangulo")
+      else:
+        fourier.func_triangle()
+        print(f"Funcion ploteada por defaulf")
+ 
+    
+    def plot_func_2(self):
+       Fourier.func_triangle()
 
     def plot_error(self ):
       t = np.arange(-1*np.pi,np.pi,0.01) 
@@ -117,6 +132,8 @@ class Window:
 
         self.fig_fourier, ax = plt.subplots()
         self.plot_sin()
+
+        
         self.plot_func()
 
         canvas_fourier = FigureCanvasTkAgg(self.fig_fourier, self.root)
