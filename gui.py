@@ -98,8 +98,10 @@ class Window:
       
 
     def plot_func(self):
-      t = np.arange(-1*np.pi,np.pi,0.01) 
+      t=np.arange(-1*np.pi,np.pi,0.01)
+       
       s=  (t/np.abs(t)) 
+      
       plt.plot(t,s)
 
     def plot_error(self ):
