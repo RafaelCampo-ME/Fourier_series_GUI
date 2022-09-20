@@ -180,6 +180,7 @@ class Window:
     def plot_values(self):
 
         self.fig_fourier, ax = plt.subplots()
+        plt.grid()
         self.plot_aprox_fourier()
 
         
