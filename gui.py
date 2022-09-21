@@ -11,7 +11,7 @@ from fourier import Fourier
  
 
 def main ():
-    """Esta funcion inicializa la interfaz"""
+    """This method launch the grafical user interface"""
     root = tkinter.Tk()
     gui = Window(root)
     gui.root.mainloop()
@@ -24,7 +24,7 @@ class Window:
       self.root = root 
       self.root.title("Tarea Fourier")
       self.root.geometry('1300x800')
-      self.amplitud =  DoubleVar()
+      self.num_aprox_serie =  DoubleVar()
       self.name_function =  StringVar(value="Escalon")
       self.name_aprox_function =  StringVar(value="Seno")
       self.eq_expression =  StringVar(value="|x|/x")
@@ -44,7 +44,7 @@ class Window:
                                 length=1000,
                                 orient= tkinter.HORIZONTAL,  
                                 command=self.update_value, 
-                                variable=self.amplitud
+                                variable=self.num_aprox_serie
                                 )
 
       self.label_function_type= tkinter.Label(self.root,
@@ -104,15 +104,12 @@ class Window:
       self.label_aprox_function_type = self.label_aprox_function_type.grid(row=4, column=4)
       self.function_aprox_menu = self.function_aprox_menu.grid(row=4, column=5)
       self.button_aprox_funct = self.button_aprox_funct.grid(row=4,column=6)
-
-
-
       self.button_qa=self.button_qa.grid(row=5,column=0, sticky=tkinter.W)
-
       self.eq_label = self.eq_label.grid(row=7, column=0)
-
       self.plot_values()
-      
+
+
+
       return None
 
 
@@ -124,8 +121,8 @@ class Window:
       self.plot_func()
       self.plot_values()
       
-      print(f"\n{algo} El nuervo valor de la amplitud es: {self.amplitud.get()} \n")
-      print(self.amplitud.get()) 
+      print(f"\n{algo} El nuervo valor n de la serie es: {self.num_aprox_serie.get()} \n")
+      print(self.num_aprox_serie.get()) 
 
     def update_function(self ):
       self.plot_func()
@@ -140,39 +137,61 @@ class Window:
         
     def plot_aprox_fourier(self ):
       f  = Fourier()
-      variable = self.name_aprox_function.get()
-      if variable == 'Seno':
-        f.plot_fourier(50)
-        
-      else:
-        f.plot_cos()
+      variable = int(self.num_aprox_serie.get()) 
+      f = f.fourier_escalon(variable)
+      t = f[0]
+      s = f[1]
+      fig = plt.plot(t,s)
+      return fig
+      
+
 
 
        
 
 
     def plot_func(self):
-      fourier=Fourier()
-      variable = self.name_function.get()
+
+      "Return a list of elements to be ploted"
+      variable =  self.name_function.get()
+
       print(f"La variable cambiada es: {variable}" )
       if variable == "Escalon":
-        fourier.plot_func()
+        self.plot_square_func()
         print(f"Funcion ploteada escalon")
-      elif variable == "Triangulo":
-        fourier.func_triangle()
-        print(f"Funcion ploteada triangulo")
-      else:
-        fourier.func_triangle()
-        print(f"Funcion ploteada por defaulf")
- 
-    
-    def plot_func_2(self):
-       Fourier.func_triangle()
 
+      elif variable == "Triangulo":
+        self.plot_triangle_func()
+        print(f"Funcion ploteada triangulo")
+
+      else:
+        self.plot_square_func()
+        print(f"Funcion ploteada por defaulf")
+
+
+ 
+    def plot_square_func(self):
+      f = Fourier()
+      t = f.function_square_pulse()[0]
+      s = f.function_square_pulse()[1]
+      fig = plt.plot(t,s)
+      return fig
+
+
+    def plot_triangle_func(self):
+      f = Fourier()
+      t = f.function_triangle_pulse()[0]
+      s = f.function_triangle_pulse()[1]
+      fig = plt.plot(t,s)
+      return fig
+ 
     def plot_error(self ):
-      t = np.arange(-1*np.pi,np.pi,0.01) 
-      s=  (t/np.abs(t)) * self.amplitud.get()
-      plt.plot(t,s)
+       f = Fourier()
+       num_exp = int(self.num_aprox_serie.get()) 
+       t = f.error_function(num_exp)[0]
+       s = f.error_function(num_exp)[1]
+       fig = plt.plot(t,s)
+       return fig
 
        
 
@@ -194,6 +213,7 @@ class Window:
 
 
         self.fig_error, ax = plt.subplots()
+        
         self.plot_error()
          
         canvas_fourier = FigureCanvasTkAgg(self.fig_error, self.root)

@@ -12,7 +12,7 @@ class Fourier:
 # TODO: This class just can handle the fourier serie for a square pulse when the pulse belows (-pi,pi), but can be refactored to use a Fourier Series in any function in that range
 # Its necesary to add a new method and change the existing ones in order to archive that 
 
-	def funcion_triangle_pulse(self):
+	def function_triangle_pulse(self):
 		"""Return a tuple object of a triangle shape pulse, where the 0 element is the time series and the 1 element es the y series"""
 		t = np.arange(-1*np.pi,np.pi, 0.01)
 		s=((1/np.pi)*-(t/abs(t))*(t)+1)
@@ -20,7 +20,7 @@ class Fourier:
 
 
 
-	def funcion_escalon(self)->list:
+	def function_square_pulse(self)->list:
 		"""Return a tuple object of a square pulse function, where 0 element is the time series and the 1 element is the y series"""
 		t= np.arange(-1*np.pi, np.pi,0.01)
 		func_escalon= lambda x: x/np.abs(x)
@@ -50,7 +50,7 @@ class Fourier:
 
 	def error_function(self,num_expansion:int):
 		"""Return a tuple object of the % of error between a square pulse function and his Fourier series aproximation, where 0 element is the time series and the 1 element is the y series"""
-		escalon = self.funcion_escalon()
+		escalon = self.function_square_pulse()
 		aprox_fourier = self.fourier_escalon(num_expansion=num_expansion)
 		error= []
 
