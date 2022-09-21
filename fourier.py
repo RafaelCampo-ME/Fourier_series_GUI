@@ -1,3 +1,4 @@
+from re import S
 import numpy as np 
 import matplotlib.pyplot as plt 
 from scipy import integrate
@@ -7,6 +8,17 @@ class Fourier:
 	"""Fourier series object"""
 	def __init__(self) -> None:
 		pass
+
+# TODO: This class just can handle the fourier serie for a square pulse when the pulse belows (-pi,pi), but can be refactored to use a Fourier Series in any function in that range
+# Its necesary to add a new method and change the existing ones in order to archive that 
+
+	def funcion_triangle_pulse(self):
+		"""Return a tuple object of a triangle shape pulse, where the 0 element is the time series and the 1 element es the y series"""
+		t = np.arange(-1*np.pi,np.pi, 0.01)
+		s=((1/np.pi)*-(t/abs(t))*(t)+1)
+		return (t,s)
+
+
 
 	def funcion_escalon(self)->list:
 		"""Return a tuple object of a square pulse function, where 0 element is the time series and the 1 element is the y series"""
@@ -20,7 +32,7 @@ class Fourier:
 
 		t= np.arange(-1*np.pi, np.pi,0.01)   ## t represents the time (x axis)
 		func_escalon= lambda x: x/(np.abs(x))
-		func_cos = lambda x,y: np.cos(y*x )
+		func_cos = lambda x,y: np.cos(y*x)
 		func_sin = lambda x,y: np.sin(y*x)
 
 
@@ -50,10 +62,10 @@ class Fourier:
 		print(f"Tamaño de la listta error: {len(escalon[0])}")
 		return(escalon[0],error)
 
-print("Inicio recorrido")
-f= Fourier()
-plt.subplot()
-plt.grid()
-print("Ya tengo el grid")
-plt.plot(f.error_function(10)[0],f.error_function(10)[1],"r--")
-plt.show()
+##print("Inicio recorrido")
+##f= Fourier()
+##plt.subplot()
+##plt.grid()
+##print("Ya tengo el grid")
+##plt.plot(f.error_function(10)[0],f.error_function(10)[1],"r--")
+##plt.show()
