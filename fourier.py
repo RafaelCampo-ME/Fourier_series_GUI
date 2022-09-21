@@ -1,4 +1,5 @@
 from re import S
+from xmlrpc.client import Boolean
 import numpy as np 
 import matplotlib.pyplot as plt 
 from scipy import integrate
@@ -27,6 +28,14 @@ class Fourier:
 		s = func_escalon(t)
 		return (t, s)
 
+
+	def function_cos_sin_random_pulse(self):
+		"""Return a tuple object of a triangle shape pulse, where the 0 element is the time series and the 1 element es the y series"""
+		t = np.arange(-1*np.pi,np.pi, 0.01)
+		s= np.abs(np.sin(t)) + np.cos(t)
+		return (t,s)
+
+
 	def fourier_escalon(self,num_expansion:int)-> list:
 		"""Return a tuple object of the Fourier series aproximation of a square pulse function, where 0 element is the time series and the 1 element is the y series"""
 
@@ -48,15 +57,20 @@ class Fourier:
 		
 		return (t, a_0)
 
-	def error_function(self,num_expansion:int):
+	def error_function(self,num_expan:int,abs_error:Boolean):
 		"""Return a tuple object of the % of error between a square pulse function and his Fourier series aproximation, where 0 element is the time series and the 1 element is the y series"""
 		escalon = self.function_square_pulse()
-		aprox_fourier = self.fourier_escalon(num_expansion=num_expansion)
+		aprox_fourier = self.fourier_escalon(num_expansion=num_expan)
 		error= []
 
-		for i in range(len(escalon[0])):
-			er=(escalon[1][i]-aprox_fourier[1][i])/escalon[1][i]
-			error.append(er)
+		if abs_error ==True:
+			for i in range(len(escalon[0])):
+				er= np.abs(np.abs((aprox_fourier[1][i]-escalon[1][i]))/escalon[1][i]) 
+				error.append(er)
+		else:
+			for i in range(len(escalon[0])):
+				er=np.abs((aprox_fourier[1][i]-escalon[1][i]))/escalon[1][i]
+				error.append(er)
 
 		print(f"Tamaño de la listta error: {len(error)}")
 		print(f"Tamaño de la listta error: {len(escalon[0])}")
