@@ -139,12 +139,13 @@ class Window:
 
         
     def plot_aprox_fourier(self ):
-      fourier_aprox = Fourier()
+      f  = Fourier()
       variable = self.name_aprox_function.get()
       if variable == 'Seno':
-        fourier_aprox.plot_sin()
+        f.plot_fourier(50)
+        
       else:
-        fourier_aprox.plot_cos()
+        f.plot_cos()
 
 
        
@@ -181,10 +182,11 @@ class Window:
 
         self.fig_fourier, ax = plt.subplots()
         plt.grid()
+        self.plot_func()
         self.plot_aprox_fourier()
 
         
-        self.plot_func()
+        
 
         canvas_fourier = FigureCanvasTkAgg(self.fig_fourier, self.root)
         canvas_fourier.draw()
@@ -197,6 +199,7 @@ class Window:
         canvas_fourier = FigureCanvasTkAgg(self.fig_error, self.root)
         canvas_fourier.draw()
         canvas_fourier.get_tk_widget().grid(row=6, column=3,columnspan=3, sticky=tkinter.E )
+
         ##To do: Necesito hacer que esta funcion sea mas simple. se puede usar un unico canvas y en lugar de eso plotearlo por aparte 
         return canvas_fourier
 
