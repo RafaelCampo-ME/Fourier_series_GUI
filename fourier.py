@@ -56,6 +56,37 @@ class Fourier:
 
 		
 		return (t, a_0)
+	
+	
+	def fourier_series_aprox(self,num_expansion:int,**func_name:str):
+		"""Return a tuple object of the Fourier serie aproximation of function"""
+		
+		func_lambda = lambda x: x/np.abs(x)
+
+		if func_name == 'Square':
+			func_lambda = lambda x: x/np.abs(x)
+		elif func_name == 'Triangle':
+			func_lambda = lambda x: ((1/np.pi)*-(x/abs(x))*(x)+1)
+		elif func_name == 'Random_sin_cos':
+			func_lambda = lambda x: np.abs(np.sin(x)) + np.cos(x)
+		else:
+			pass 
+
+		t= np.arange(-1*np.pi, np.pi,0.01)   ## t represents the time (x axis)
+		func_cos = lambda x,y: np.cos(y*x)
+		func_sin = lambda x,y: np.sin(y*x)
+
+		a_0 = []
+		for i in range(len(t)):
+			s=0
+			for j in range(num_expansion):
+				a_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),0,np.pi)[0])
+				b_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),0,np.pi)[0])
+				s=s+a_n*func_cos(t[i],j) + b_n*func_sin(t[i],j) 
+			a_0.append(s) 
+
+		return (t, a_0)
+
 
 	def error_function(self,num_expan:int,abs_error:Boolean):
 		"""Return a tuple object of the % of error between a square pulse function and his Fourier series aproximation, where 0 element is the time series and the 1 element is the y series"""
