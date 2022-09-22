@@ -1,7 +1,7 @@
 # Fourier_series_GUI
 
 A graphical user interface that allows users to interact with basic concepts of the Fourier series. Build with python's library Tkinter.  
-The Fourier series algorith was implemented with numpy y scipy only
+The Fourier series algorithm was implemented using Numpy y scipy only
 
 
 Change the number of elements in the Fourier series expansion:
@@ -10,7 +10,7 @@ Change the error graph
 For diferent functions
 ________________________________________________________________________________________________________________________________________
 
-To run:
+To run: Clone repository and execute the file GUI.py, please fulfil the following requirements.
 
   Python version:
                 python=3.10
