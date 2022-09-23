@@ -160,6 +160,19 @@ class Window:
       fig = plt.plot(t,s)
       return fig
       
+    def plot_aprox_fourier_general(self ):
+      f  = Fourier()
+      var_num_aprox = int(self.num_aprox_serie.get())
+      var_func_name = self.name_function.get()
+      if var_num_aprox >= 15:
+        self.info_num_aprox()
+
+      f = f.fourier_series_aprox(var_num_aprox,var_func_name)
+      t = f[0]
+      s = f[1]
+      fig = plt.plot(t,s,'green', linewidth=1)
+      return fig
+      
 
 
     def plot_func(self):
@@ -176,6 +189,10 @@ class Window:
         self.plot_triangle_func()
         print(f"Funcion ploteada triangulo")
 
+      elif variable == "Periodica senos y cosenos":
+        self.plot_sin_random_func()
+        print(f"Funcion ploteada es una combinacion random de senos y cosenos")
+
       else:
         self.plot_square_func()
         print(f"Funcion ploteada por defaulf")
@@ -187,19 +204,31 @@ class Window:
       f=f.function_square_pulse()
       t = f[0]
       s = f[1]
-      fig = plt.plot(t,s)
+      fig = plt.plot(t,s,'r--',linewidth=1.5)
       return fig
 
 
     def plot_triangle_func(self):
       f = Fourier()
-      t = f.function_triangle_pulse()[0]
-      s = f.function_triangle_pulse()[1]
-      fig = plt.plot(t,s)
+      f = f.function_triangle_pulse()
+      t = f[0]
+      s = f[1]
+      fig = plt.plot(t,s,'r--',linewidth=1.5)
       return fig
+
+    def plot_sin_random_func(self):
+      f = Fourier()
+      f = f.function_cos_sin_random_pulse()
+      t = f[0]
+      s = f[1]
+      fig = plt.plot(t,s,'r--',linewidth=1.5)
+      return fig
+
+
  
     def plot_error(self ):
        f = Fourier()
+       func_name_var = self.name_function.get()
        abs_error = self.error_function_name.get()
        if abs_error == "Error Porcentual":
         abs_error = False
@@ -207,7 +236,7 @@ class Window:
         abs_error = True
 
        num_exp = int(self.num_aprox_serie.get()) 
-       f=f.error_function(num_exp,abs_error=abs_error)
+       f=f.error_function(num_exp,func_name=func_name_var, abs_error=abs_error)
        t = f[0]
        s = f[1]
        fig = plt.plot(t,s)
@@ -222,7 +251,8 @@ class Window:
         self.fig_fourier, ax = plt.subplots()
         plt.grid()
         self.plot_func()
-        self.plot_aprox_fourier()
+        #self.plot_aprox_fourier()
+        self.plot_aprox_fourier_general()
 
         
         
@@ -233,7 +263,7 @@ class Window:
 
 
         self.fig_error, ax = plt.subplots()
-        
+        plt.grid()
         self.plot_error()
          
         canvas_fourier = FigureCanvasTkAgg(self.fig_error, self.root)
