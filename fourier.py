@@ -62,11 +62,11 @@ class Fourier:
 		
 		func_lambda = lambda x: x/np.abs(x)
 
-		if func_name == 'Square':
+		if func_name == 'Square' or func_name == 'Escalon' :
 			func_lambda = lambda x: x/np.abs(x)
-		elif func_name == 'Triangle':
+		elif func_name == 'Triangle'or func_name == "Triangulo" :
 			func_lambda = lambda x: ((1/np.pi)*-(x/abs(x))*(x)+1)   
-		elif func_name == 'Random_sin_cos':
+		elif func_name == 'Random_sin_cos' or func_name == "Periodica senos y cosenos":
 			func_lambda = lambda x: np.abs(np.sin(x)) + np.cos(x)
 		else:
 			pass 
@@ -85,24 +85,23 @@ class Fourier:
 				b_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),0,np.pi)[0])
 				s=s+a_n*func_cos(t[i],j) + b_n*func_sin(t[i],j) 
 			s_list.append(s) 
-
+		print("Message: The Fourier aproximation has been calculated.")
 		return (t, s_list)
 
 
-	def error_function(self,num_expan:int = 1,func_name:str='Square',abs_error:bool = True):
+	def error_function(self,num_expan:int = 1,func_name:str='Escalon',abs_error:bool = True):
 		"""Return a tuple object of the % of error between a square pulse function and his Fourier series aproximation, where 0 element is the time series and the 1 element is the y series"""
-		escalon = self.function_square_pulse()
-		aprox_fourier = self.fourier_series_aprox(num_expansion=num_expan,func_name='Square')
+		 
 
-		if func_name == 'Square':
+		if func_name == 'Escalon':
 			escalon = self.function_square_pulse()
 			aprox_fourier = self.fourier_series_aprox(num_expansion=num_expan,func_name='Square')
-		elif func_name == 'Triangle':
+		elif func_name == 'Triangulo':
 			escalon = self.function_triangle_pulse()  
-			aprox_fourier = self.fourier_escalon(num_expansion=num_expan,func_name='Triangle')
-		elif func_name == 'Random_sin_cos':
+			aprox_fourier = self.fourier_series_aprox(num_expansion=num_expan,func_name='Triangle')
+		elif func_name == "Periodica senos y cosenos":
 			escalon = self.function_cos_sin_random_pulse() 
-			aprox_fourier = self.fourier_escalon(num_expansion=num_expan,func_name='Random_sin_cos')
+			aprox_fourier = self.fourier_series_aprox(num_expansion=num_expan,func_name='Random_sin_cos')
 	
 		
 
@@ -118,8 +117,7 @@ class Fourier:
 				er=np.abs((aprox_fourier[1][i]-escalon[1][i]))/escalon[1][i]
 				error.append(er)
 
-		print(f"Tamaño de la lista error: {len(error)}")
-		print(f"Tamaño de la listta error: {len(escalon[0])}")
+		print(f"Message: The error function has been calculated.") 
 		return(escalon[0],error)
 
 ##print("Inicio recorrido")
