@@ -1,6 +1,7 @@
 import numpy as np 
 import matplotlib.pyplot as plt 
 from scipy import integrate
+from dataclasses import dataclass
  
 
 class Fourier:
