@@ -129,7 +129,8 @@ class Window:
       print("Message: We are ploting the graphs. Please Wait \n")
 
       self.plot_values()
-      self.error_table = self.error_table.grid(row = 8, column=3, columnspan=3)
+
+      self.error_table.grid(row = 8, column=3, columnspan=3)
       return None
 
 
@@ -150,8 +151,10 @@ class Window:
       print(f" {self.name_function.get()}" )
     
     def update_error_function(self):
+      print("Mesagge: We are updating the graphs \n")
       self.plot_error()
       self.plot_values()
+      self.update_colum_values()
     
 
        
@@ -242,6 +245,15 @@ class Window:
       fig = plt.plot(t,s,'r--',linewidth=1.5)
       print("Message: The sin and cos combination function has been ploted")
       return fig
+    
+    def update_colum_values(self):
+
+      tipo_funcion = self.name_function.get()
+      n_exp = self.num_aprox_serie.get()
+      error = self.avg_error()
+      self.error_table.insert("", 'end', text= 1, values=(tipo_funcion,n_exp,error))
+      print("Message: The error table has been updated")
+      return "Valores actualizados"
 
 
  
@@ -262,6 +274,31 @@ class Window:
        s = f[1]
        fig = plt.plot(t,s)
        return fig
+
+    
+    def avg_error(self ):
+       f = Fourier()
+       func_name_var = self.name_function.get()
+       abs_error = self.error_function_name.get()
+       if abs_error == "Error Porcentual":
+        abs_error = False
+       else:
+        abs_error = True
+
+       print(f"Message: The plot error function has started \nThe name of the error function is: {func_name_var}")
+
+       num_exp = int(self.num_aprox_serie.get()) 
+       f=f.error_function(num_exp,func_name=func_name_var, abs_error=abs_error)
+       s = f[1]
+ 
+       avg_error=sum(s)
+       print("\n h \n h \n h")
+       print(avg_error)
+       print("\n h \n h \n h ")
+ 
+         
+       
+       return avg_error
 
        
 
