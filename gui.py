@@ -250,7 +250,7 @@ class Window:
 
       tipo_funcion = self.name_function.get()
       n_exp = self.num_aprox_serie.get()
-      error = self.avg_error()
+      error = f"{self.avg_error()} %" 
       self.error_table.insert("", 'end', text= 1, values=(tipo_funcion,n_exp,error))
       print("Message: The error table has been updated")
       return "Valores actualizados"
@@ -291,7 +291,7 @@ class Window:
        f=f.error_function(num_exp,func_name=func_name_var, abs_error=abs_error)
        s = f[1]
  
-       avg_error=sum(s)
+       avg_error= (sum(s)/len(s))*100
        print("\n h \n h \n h")
        print(avg_error)
        print("\n h \n h \n h ")
