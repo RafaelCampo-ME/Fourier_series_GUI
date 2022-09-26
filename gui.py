@@ -1,10 +1,10 @@
-from statistics import variance
 import tkinter
 from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringVar
-import numpy as np 
 import matplotlib.pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from fourier import Fourier
+from datetime import datetime 
+
 
  
 
@@ -23,7 +23,7 @@ class Window:
     def __init__(self, root):
       self.root = root 
       self.root.title("Tarea Fourier")
-      self.root.geometry('1300x800')
+      self.root.geometry('1300x1200')
       self.num_aprox_serie =  DoubleVar()
       self.name_function =  StringVar(value="Escalon")
       self.error_function_name = StringVar(value="Error Porcentual")
@@ -94,10 +94,22 @@ class Window:
                                   textvariable=self.eq_expression, 
                                   text= f"La ecuacion es: {self.eq_expression}"
                                   )
-                   
+
+      self.error_table = ttk.Treeview(self.root, 
+                                      columns=['graph_type','n_aprox','avg_error'],
+                                      
+                                      show = "headings"
+                                      )
+
+      # define headings
+      self.error_table.heading('graph_type', text='Tipo de funcion')
+      self.error_table.heading('n_aprox', text='# Expansiones')
+      self.error_table.heading('avg_error', text='Error promedio')
 
      
       ##Definig the position in the grid of every widgets
+
+      print(f"Message: The GUI is starting. Please Wait \n")
 
       self.label_coef=self.label_coef.grid(row=3, column=0, sticky=tkinter.W,  padx=5, pady=5)
       self.escala = self.escala.grid(row=3, column=1,columnspan=4,  padx=5, pady=5, sticky=tkinter.W)
@@ -113,8 +125,12 @@ class Window:
 
       self.button_qa=self.button_qa.grid(row=5,column=0, sticky=tkinter.W)
       self.eq_label = self.eq_label.grid(row=7, column=0)
+
+      print("Message: We are ploting the graphs. Please Wait \n")
+
       self.plot_values()
 
+      self.error_table.grid(row = 8, column=3, columnspan=3)
       return None
 
 
@@ -135,8 +151,10 @@ class Window:
       print(f" {self.name_function.get()}" )
     
     def update_error_function(self):
+      print("Mesagge: We are updating the graphs \n")
       self.plot_error()
       self.plot_values()
+      self.update_colum_values()
     
 
        
@@ -179,8 +197,9 @@ class Window:
 
       "Return a list of elements to be ploted"
       variable =  self.name_function.get()
+      print(f"Message: The original function is going to be ploted. The function name is: {variable} \n")
+ 
 
-      print(f"La variable cambiada es: {variable}" )
       if variable == "Escalon":
         self.plot_square_func()
         print(f"Funcion ploteada escalon")
@@ -205,6 +224,7 @@ class Window:
       t = f[0]
       s = f[1]
       fig = plt.plot(t,s,'r--',linewidth=1.5)
+      print("Message: The square pulse function has been ploted.")
       return fig
 
 
@@ -214,6 +234,7 @@ class Window:
       t = f[0]
       s = f[1]
       fig = plt.plot(t,s,'r--',linewidth=1.5)
+      print("Message: The triangle pulse function has been ploted")
       return fig
 
     def plot_sin_random_func(self):
@@ -222,7 +243,17 @@ class Window:
       t = f[0]
       s = f[1]
       fig = plt.plot(t,s,'r--',linewidth=1.5)
+      print("Message: The sin and cos combination function has been ploted")
       return fig
+    
+    def update_colum_values(self):
+
+      tipo_funcion = self.name_function.get()
+      n_exp = self.num_aprox_serie.get()
+      error = f"{self.avg_error()} %" 
+      self.error_table.insert("", 'end', text= 1, values=(tipo_funcion,n_exp,error))
+      print("Message: The error table has been updated")
+      return "Valores actualizados"
 
 
  
@@ -235,12 +266,39 @@ class Window:
        else:
         abs_error = True
 
+       print(f"Message: The plot error function has started \nThe name of the error function is: {func_name_var}")
+
        num_exp = int(self.num_aprox_serie.get()) 
        f=f.error_function(num_exp,func_name=func_name_var, abs_error=abs_error)
        t = f[0]
        s = f[1]
        fig = plt.plot(t,s)
        return fig
+
+    
+    def avg_error(self ):
+       f = Fourier()
+       func_name_var = self.name_function.get()
+       abs_error = self.error_function_name.get()
+       if abs_error == "Error Porcentual":
+        abs_error = False
+       else:
+        abs_error = True
+
+       print(f"Message: The plot error function has started \nThe name of the error function is: {func_name_var}")
+
+       num_exp = int(self.num_aprox_serie.get()) 
+       f=f.error_function(num_exp,func_name=func_name_var, abs_error=abs_error)
+       s = f[1]
+ 
+       avg_error= (sum(s)/len(s))*100
+       print("\n h \n h \n h")
+       print(avg_error)
+       print("\n h \n h \n h ")
+ 
+         
+       
+       return avg_error
 
        
 
@@ -269,8 +327,6 @@ class Window:
         canvas_fourier = FigureCanvasTkAgg(self.fig_error, self.root)
         canvas_fourier.draw()
         canvas_fourier.get_tk_widget().grid(row=6, column=3,columnspan=3, sticky=tkinter.E )
-
-        ##To do: Necesito hacer que esta funcion sea mas simple. se puede usar un unico canvas y en lugar de eso plotearlo por aparte 
         return canvas_fourier
 
 
