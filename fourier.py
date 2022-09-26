@@ -15,7 +15,7 @@ class Fourier:
 	def function_triangle_pulse(self):
 		"""Return a tuple object of a triangle shape pulse, where the 0 element is the time series and the 1 element es the y series"""
 		t = np.arange(-1*np.pi,np.pi, 0.01)
-		s=((1/np.pi)*-(t/abs(t))*(t)+1)
+		s=((1/np.pi)*-(t/abs(t))*(t)+1)   
 		return (t,s)
 
 
@@ -78,13 +78,13 @@ class Fourier:
 
 		s_list = []
 		for i in range(len(t)):
-			s= a_0
+			sumatory = 0
 			for j in range(num_expansion):
 				
 				a_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),0,np.pi)[0])
 				b_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),0,np.pi)[0])
-				s=s+a_n*func_cos(t[i],j) + b_n*func_sin(t[i],j) 
-			s_list.append(s) 
+				sumatory=sumatory+a_n*func_cos(t[i],j) + b_n*func_sin(t[i],j) 
+			s_list.append(sumatory+a_0) 
 		print("Message: The Fourier aproximation has been calculated.")
 		return (t, s_list)
 
