@@ -1,6 +1,7 @@
 import numpy as np
 import logging
 from scipy import integrate
+from scipy.fft import fft
 
 
 class fourierSeries:
@@ -47,12 +48,15 @@ class fourierSeries:
 		pass
 	
 
-	def __fast_fourier_series()->list:
-		return ()
+	def __fast_fourier_series(time)->list:
+		return fft(time)
 
 
-	def __error_function()->list:
-		return ()
+	def __error_function(time,fourier)->list:
+		error = []
+		for i in range(len(time)):
+			error.append((fourier[i]-time[i])/time[i]) 
+		return error
 
 
 	def __average_error()->float:
