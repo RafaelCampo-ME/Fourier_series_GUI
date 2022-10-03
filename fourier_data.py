@@ -15,7 +15,7 @@ class fourierSeries:
 		self.function_directory = function_directory 
 
 
-	def __time_series(range=np.pi,num_partitions=0.01)->list:
+	def __time_series(self,range=np.pi,num_partitions=0.01)->list:
 		return np.arange(-1*range, range,num_partitions) 
 
 
@@ -26,8 +26,10 @@ class fourierSeries:
 		func_sin = lambda x,y: np.sin(y*x)
 		a_0 =  (1/np.pi) * (integrate.quad(func_lambda,-1*np.pi,0)[0]+integrate.quad(func_lambda,0,np.pi)[0])
 
+		time = self.__time_series(np.pi,0.01)
+
 		s_list = []
-		for i in range(len(t)):
+		for i in range(len(time)):
 			sumatory = 0
 			for j in range(num_expansion):
 				
@@ -38,11 +40,6 @@ class fourierSeries:
 		print("Message: The Fourier aproximation has been calculated.")
 		return s_list 
 
-
-
-
-		logging.info("Fourier series has been calculated succesfully")
-		return ()
 
 	def __fourier_exp_series_aprox(self)->list:
 		pass
@@ -59,8 +56,9 @@ class fourierSeries:
 		return error
 
 
-	def __average_error()->float:
-		return()
+	def __average_error(error:list)->float:
+		avg_error = sum(error)/ len(error)
+		return avg_error
 
 
 	def fourier_series_info(self,aprox_type:str = 'LFS'):
@@ -75,7 +73,7 @@ class fourierSeries:
 				raise ValueError (f"{aprox_type} is a unsupported aproximation type.")
 
 
-			time = self.__time_series()
+			time = self.__time_series(np.pi,0.01)
 
 			if aprox_type == 'LFS':
 				s = self.__fourier_series_aprox(time, self.function_name,self.num_expansion)
