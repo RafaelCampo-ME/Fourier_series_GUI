@@ -1,7 +1,7 @@
 # Fourier_series_GUI
 
-![Conda](https://img.shields.io/conda/pn/conda-forge/scipy)
-
+![Conda](https://img.shields.io/conda/pn/conda-forge/scipy) ![GitHub contributors](https://img.shields.io/github/contributors/RafaelCampo-ME/Fourier_series_GUI?color=greene)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/RafaelCampo-ME/Fourier_series_GUI)
+ 
 A graphical user interface that allows users to interact with basic concepts of the Fourier series. Build with python's library Tkinter.  
 The Fourier series algorithm was implemented using Numpy y scipy only
 
