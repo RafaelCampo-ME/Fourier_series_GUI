@@ -1,5 +1,7 @@
 # Fourier_series_GUI
 
+https://img.shields.io/conda/pn/conda-forge/scipy
+
 A graphical user interface that allows users to interact with basic concepts of the Fourier series. Build with python's library Tkinter.  
 The Fourier series algorithm was implemented using Numpy y scipy only
 
