@@ -49,14 +49,14 @@ class fourierSeries:
 		return fft(time)
 
 
-	def __error_function(time,fourier)->list:
+	def __error_function(self,time,fourier)->list:
 		error = []
 		for i in range(len(time)):
 			error.append((fourier[i]-time[i])/time[i]) 
 		return error
 
 
-	def __average_error(error:list)->float:
+	def __average_error(self,error:list)->float:
 		avg_error = sum(error)/ len(error)
 		return avg_error
 
@@ -75,12 +75,20 @@ class fourierSeries:
 
 			time = self.__time_series(np.pi,0.01)
 
+			origin_function =   self.function_directory[self.function_name](time)
+
+
 			if aprox_type == 'LFS':
-				s = self.__fourier_series_aprox(time, self.function_name,self.num_expansion)
+				serie = self.__fourier_series_aprox(time, self.function_name,self.num_expansion)
 			else:
-				s = self.__fast_fourier_series(time)
+				serie = self.__fast_fourier_series(time)
+
+			error = self.__error_function(time,serie)
+
+			avg_error = self.__average_error(error)
+
 			
-			return time,s
+			return time,origin_function,serie, error, avg_error
 
 	def change_num_expansions(self)-> tuple:
 		pass
