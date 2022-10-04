@@ -1,7 +1,6 @@
 # Fourier_series_GUI
 
-![carbon](https://user-images.githubusercontent.com/68289151/193840440-2db7c266-9353-46e5-9818-bad21d7f3b9b.svg)
-
+![carbon (1)](https://user-images.githubusercontent.com/68289151/193840776-b80a3d29-4d96-40ea-b489-ca348132946c.svg)
 
 ![Conda](https://img.shields.io/conda/pn/conda-forge/python?color=orange) ![GitHub contributors](https://img.shields.io/github/contributors/RafaelCampo-ME/Fourier_series_GUI?color=greene)  ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/RafaelCampo-ME/Fourier_series_GUI)
  
