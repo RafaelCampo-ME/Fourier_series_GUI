@@ -8,30 +8,30 @@ class fourierSeries:
 	"""_summary_: Retrurns a tuple of list that contains the points of the original function and his fourier series aproximation
 	"""
 
-	def __init__(self,function_name:str, num_expansion:int = 1, function_directory:dict={}) -> None:
+	def __init__(self,function_name:str='Square', num_expansion:int = 1, function_directory:dict={}) -> None:
 		self.function_name = function_name
 		self.num_expansion = num_expansion
 		self.function_directory = function_directory 
-		
+
 
 
 	def __time_series(self,range=np.pi,num_partitions=0.01)->list:
 		return np.arange(-1*range, range,num_partitions) 
 
 
-	def __fourier_series_aprox(self,time:list=[], function_name:str='Square', num_expansion:int=1)->list:
+	def __fourier_series_aprox(self,time:list=[])->list:
 		"""_summary_
 
 		Args:
-			time (list, optional): _description_. Defaults to [].
-			function_name (str, optional): _description_. Defaults to 'Square'.
-			num_expansion (int, optional): _description_. Defaults to 1.
+			time (list, optional): Time series. Defaults to [].
+			function_name (str, optional): Function that will be approximated by the Fourier series. Defaults to 'Square'.
+			num_expansion (int, optional): Number of expansion of the fourier series aproximation (n). Defaults to 1.
 
 		Returns:
 			list: _description_
 		"""
 
-		func_lambda= self.function_directory[function_name]
+		func_lambda= self.function_directory[self.function_name]
 		func_cos = lambda x,y: np.cos(y*x)
 		func_sin = lambda x,y: np.sin(y*x)
 		a_0 =  (1/np.pi) * (integrate.quad(func_lambda,-1*np.pi,0)[0]+integrate.quad(func_lambda,0,np.pi)[0])
@@ -40,8 +40,8 @@ class fourierSeries:
 
 		s_list = []
 		for i in range(len(time)):
-			sumatory = 0
-			for j in range(num_expansion):
+			sumatory = a_0
+			for j in range(self.num_expansion):
 				a_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_cos(x,j),0,np.pi)[0])
 				b_n = (1/np.pi)*(integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),-np.pi,0)[0]+integrate.quad(lambda x: func_lambda(x)*func_sin(x,j),0,np.pi)[0])
 				sumatory=sumatory+a_n*func_cos(time[i],j) + b_n*func_sin(time[i],j) 
@@ -82,7 +82,7 @@ class fourierSeries:
 			time = self.__time_series(np.pi,0.01)
 			origin_function =   self.function_directory[self.function_name](time)
 			if aprox_type == 'LFS':
-				serie = self.__fourier_series_aprox(time, self.function_name,self.num_expansion)
+				serie = self.__fourier_series_aprox(time)
 			else:
 				serie = self.__fast_fourier_series(time)
 			error = self.__error_function(time,serie)
