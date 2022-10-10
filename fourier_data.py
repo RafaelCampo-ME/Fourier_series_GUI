@@ -61,7 +61,7 @@ class fourierSeries:
 	def __error_function(self,time,fourier)->list:
 		error = []
 		for i in range(len(time)):
-			error.append((fourier[i]-time[i])/time[i]) 
+			error.append(np.abs(fourier[i]-time[i])/time[i]) 
 		return error
 
 
