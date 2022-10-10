@@ -1,0 +1,22 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.title {
+    background-color: red;
+    text-align: center;
+}
+
+.plot-div {
+    background-color: blue;
+    margin: 10px;
+    min-width: 500px;
+    min-height: 250px;
+    display: inline-flex;
+}
+
+.plot-div div{
+    background-color: orange;  
+    width: 500px;
+    margin: 10px;
+}

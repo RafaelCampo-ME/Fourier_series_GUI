@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="styles.css" /> 
+        <title>Link CSS to HTML</title>
 
     </head>
     <body>
 
         <div class="title"> 
-            <h2 class="main-title">Universidad de Buenos Aires</h2>
-            <h2 class="main-title">Complemento de matemáticas</h2>
-            <h3 class="subtitle">Rafael Santiago Campo Serrano</h3>
-            <h3 class="subtitle">Especializacion en optoelectronica</h3>
+            <h3 class="main-title">Universidad de Buenos Aires</h3>
+            <h3 class="main-title">Especializacion en optoelectronica</h3>
+            <h4 class="subtitle">Complemento de matemáticas</h4>
+            <h4 class="subtitle">Rafael Santiago Campo Serrano</h4>
         </div>
 
         <div class="control-panel"> 
-           <button>Hola</button>
+            
+            <label for="aproximation">Choose a number of expansions:</label>
+            <input id="aproximation" type="range" min="1" max="100" value="2" steps="1">
+            <button>Update</button>
+
+            <label for="pet-select">Choose a pet:</label>
+
+            <select name="pets" id="pet-select">
+                <option value="">--Please choose an option--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="hamster">Hamster</option>
+                <option value="parrot">Parrot</option>
+                <option value="spider">Spider</option>
+                <option value="goldfish">Goldfish</option>
+            </select>
+
+            
+
+        </div>
+
+        <div class="plot-div">
+
+            <div class="fourier-plot" id="fourier">
+            </div>
+            <div class="fourier-plot" id ="error">
+            </div>
+        </div>
+
+        <div class="plot-info">
+            <table></table>
         </div>
 
     </body>
