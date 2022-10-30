@@ -15,3 +15,6 @@ plt.plot(f[0],f[3])
 print(f[4])
 plt.show()
 #print(f)
+
+
+ 
