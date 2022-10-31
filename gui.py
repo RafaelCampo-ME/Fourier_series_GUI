@@ -2,13 +2,9 @@ import tkinter
 from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringVar
 import matplotlib.pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from fourier import Fourier
-from datetime import datetime 
+from fourier import Fourier 
 
 
- 
-
- 
 
 def main ():
     """This method launch the grafical user interface"""
@@ -292,12 +288,7 @@ class Window:
        s = f[1]
  
        avg_error= (sum(s)/len(s))*100
-       print("\n h \n h \n h")
-       print(avg_error)
-       print("\n h \n h \n h ")
- 
          
-       
        return avg_error
 
        
