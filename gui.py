@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Canvas, Scale, Variable, messagebox, ttk, DoubleVar, StringVar
+from tkinter import messagebox, ttk, DoubleVar, StringVar
 import matplotlib.pyplot as plt 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from fourier import Fourier 
