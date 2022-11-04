@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 
 func_directory = { 'Square':   lambda x: x/np.abs(x)}
 expansion = 49
-
 f = fourierSeries(function_name='Square',function_directory=func_directory,num_expansion=expansion)
 f = f.fourier_series_info()
 plt.subplot()
