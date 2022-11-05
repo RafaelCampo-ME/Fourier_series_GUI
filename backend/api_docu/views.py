@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import generics
+from api_fourier.models import documentation
+from .serializers import docuSerializer
 
-# Create your views here.
+class BookAPIView(generics.ListAPIView):
+    queryset = documentation.objects.all()
+    serializer_class = docuSerializer

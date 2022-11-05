@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #local
+    # 3rd party
+    'rest_framework', # new
 
-    'api_fourier'
+    #local
+    'api_fourier',
+    'api_docu'
 ]
 
 MIDDLEWARE = [
