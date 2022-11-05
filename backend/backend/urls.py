@@ -18,6 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    ##path('api_fourier/',include('api_fourier.urls')),
+    path('api_fourier/',include('api_fourier.urls')),
     path('',include('api_docu.urls')) ##Nuevo
 ]

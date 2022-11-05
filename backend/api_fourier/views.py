@@ -1,13 +1,7 @@
-from django.shortcuts import render
+from rest_framework import generics
 from api_fourier.models import documentation
+from .serializer import docuSerializer
 
-##from rest_framework import generics
-#from api_fourier.models import documentation
-##from  import BookSerializer
-
-
-
-# Create your views here.
-class documentationAPIView():
-    queryset = documentation.objects.all() 
-    
+class  DocuAPIViewf(generics.ListAPIView):
+    queryset = documentation.objects.filter(title="About Fourier Series GUI project") 
+    serializer_class = docuSerializer
