@@ -5,19 +5,6 @@
 import sys
 from pathlib import Path
 
-if __name__ == '__main__' and __package__ is None:
-    file = Path(__file__).resolve()
-    parent, top = file.parent, file.parents[3]
-
-    sys.path.append(str(top))
-    try:
-        sys.path.remove(str(parent))
-    except ValueError: # Already removed
-        pass
-
-    import FourierLogic.fourier_data
-    __package__ = 'FourierLogic.fourier_data'
-
 
 from django.http import JsonResponse 
 from FourierLogic.fourier_data import fourierSeries 
