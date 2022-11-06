@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 from django.http import JsonResponse 
-from FourierLogic.fourier_data import fourierSeries 
+from fourier_data import fourierSeries 
 import numpy as np
 
 class  pyfourierDataAPI():
