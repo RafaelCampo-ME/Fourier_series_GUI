@@ -39,5 +39,5 @@ class  pyfourierDataAPI():
             "error_serie":error_serie,
             "avg_error":avg_error},
             "Request_creation_time": start_time,
-            "return_time":now
+            "Request_completion_time":now
             })
