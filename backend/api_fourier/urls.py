@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import DocuAPIViewf 
+from .views import pyfourierDataAPI 
 
 urlpatterns = [
-    path('',DocuAPIViewf.as_view()),
-    path('lista',DocuAPIViewf.fourierList)
+    path('',pyfourierDataAPI.fourierList),
+    path('data',pyfourierDataAPI.fourierAprox)
     ]
