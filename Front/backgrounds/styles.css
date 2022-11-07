@@ -1,0 +1,138 @@
+* {
+    font-size: 1rem;
+    background-color: #142320;
+    margin:0;
+    padding: 0;
+}
+.background_container {
+display: block;
+align-items: center;
+justify-content: center;
+position: relative;
+}
+
+#sub_1 {
+    position: relative;
+    margin-left: 50%;
+    margin-top: 0rem;
+    transform: translate(-50%, 0);
+    z-index: 1200;
+}
+
+.medio {
+    position: relative;
+    width: 17rem;
+    height: fit-content;
+    background-color: red;
+    margin-top: 20rem;
+    z-index: 1000;
+    
+}
+
+#sub_2 {
+    position: relative;
+    margin-left: 0rem;
+    margin-top: 0rem;
+    z-index: 900;
+}
+
+
+.back_sub_container_h {
+height: 20rem;
+display: inline-block;
+}
+
+
+.background {
+    width: 1rem;
+    min-height: 20rem;
+    background-color: #5D733C;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+#empty_red{
+    width: 5rem;
+    background-color: blue;
+}
+
+.empty_space {
+    width: 1rem;
+    min-height: 20rem;
+    background-color:#F29544;
+    position: relative;
+    margin-left: 0rem;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+.oblicuo {
+    position: relative;
+    margin-left: 2.755rem;
+    display: block;  
+    height: fit-content;
+}
+
+.oblicuo .super .background {
+    min-height: 10rem;
+    transform: rotate(45deg);
+    margin-top: -1.73rem;
+    z-index: 100;
+}
+
+.oblicuo .super .empty_space {
+    min-height: 10rem;
+    transform: rotate(45deg);
+    margin-top: -1.73rem;
+    z-index: 100;
+}
+.super{
+    z-index: 100;
+    margin-left: -1rem;
+}
+
+.down {
+    margin-left: 5rem;
+    background-color: red;
+    z-index: 1;
+}
+.oblicuo .down .background {
+    min-height: 10rem;
+    transform: rotate(-45deg);
+    margin-top: -1.73rem;
+    z-index: 1;
+}
+
+.oblicuo .down .empty_space {
+
+    min-height: 10rem;
+    transform: rotate(-45deg);
+    margin-top: -1.73rem;
+    z-index: 1;
+
+}
+
+#oblicuo_2 {
+    position: absolute;
+    margin-top: 7rem;
+    background-color: blueviolet;
+}
+
+
+#oblicuo_2  .empty_space{
+    position:relative;
+    margin-top: -2.4rem;
+    display: inline-block;
+    transform: rotate(-45deg);
+}
+#oblicuo_2  .background{
+    position:relative;
+    margin-top: -2.4rem;
+    display: inline-block;
+    transform: rotate(-45deg);
+}
