@@ -16,14 +16,16 @@ position: relative;
     margin-left: 50%;
     margin-top: 0rem;
     transform: translate(-50%, 0);
+    z-index: 1200;
 }
 
 .medio {
     position: relative;
     width: 17rem;
-    height: 20rem;
+    height: fit-content;
     background-color: red;
     margin-top: 20rem;
+    z-index: 1000;
     
 }
 
@@ -31,6 +33,7 @@ position: relative;
     position: relative;
     margin-left: 0rem;
     margin-top: 0rem;
+    z-index: 900;
 }
 
 
@@ -71,8 +74,8 @@ display: inline-block;
 .oblicuo {
     position: relative;
     margin-left: 2.755rem;
-    display: block;
-    
+    display: block;  
+    height: fit-content;
 }
 
 .oblicuo .super .background {
@@ -87,7 +90,6 @@ display: inline-block;
     transform: rotate(45deg);
     margin-top: -1.73rem;
     z-index: 100;
-   
 }
 .super{
     z-index: 100;
@@ -95,8 +97,7 @@ display: inline-block;
 }
 
 .down {
-    position: absolute;
-    margin-left: 5.335rem;
+    margin-left: 5rem;
     background-color: red;
     z-index: 1;
 }
@@ -114,4 +115,24 @@ display: inline-block;
     margin-top: -1.73rem;
     z-index: 1;
 
+}
+
+#oblicuo_2 {
+    position: absolute;
+    margin-top: 7rem;
+    background-color: blueviolet;
+}
+
+
+#oblicuo_2  .empty_space{
+    position:relative;
+    margin-top: -2.4rem;
+    display: inline-block;
+    transform: rotate(-45deg);
+}
+#oblicuo_2  .background{
+    position:relative;
+    margin-top: -2.4rem;
+    display: inline-block;
+    transform: rotate(-45deg);
 }
