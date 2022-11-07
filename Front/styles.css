@@ -1,14 +1,116 @@
 * {
     font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+   /* background-color: #F2E9D8/* #0D0D0D;*/ 
+}
+
+.cool_logo {
+background-color: red;
+height: 250px;
+width: 300px;
+z-index: 20;
+}
+
+#logo_cuerpo {
+    height:205px;
+    width: 100px;
+    background-color: #5D733C;
+    position: absolute;
+    z-index: 100;
+    margin-top: 25px;
+    margin-left: 75px;
+    border-radius: 10px 50px 0px 70px ;
+    
+}
+
+#logo_copete {
+    height:100px;
+    width: 75px;
+    background-color: #F29544;
+    position: absolute;
+    z-index: 10;
+    margin-top: 15px;
+    margin-left: 125px;
+    border-radius: 10px 50px 0px 70px ;
+    transform: rotate(-25deg);
+    
+}
+
+
+#logo_pico_sup {
+    height:35px;
+    width: 55px;
+    background-color: blue;
+    position: absolute;
+    z-index: 150;
+    margin-top: 50px;
+    margin-left: 15px;
+    border-radius: 50px 0px 0px 0px;
+    
+}
+
+#logo_pico_inf {
+
+    height:15px;
+    width: 25px;
+    background-color: blue;
+    position: absolute;
+    z-index: 150;
+    margin-top: 90px;
+    margin-left: 40px;
+    border-radius: 0px 0px 0px 50px ;
+}
+
+#logo_ojo {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    position: absolute;
+    z-index: 200;
+    margin-top: 50px;
+    margin-left: 95px;
+    border-radius: 50%;
+}
+
+.logo_ala {
+    height: 70px;
+    width: 150px;
+    background-color: aqua;
+    position: absolute;
+    z-index: 500;
+    transform: skew(30deg);
+}
+
+#ala_sup { 
+    margin-top: 120px;
+    margin-left: 105px;
+    border-radius: 15px  20px 10px 30px;
+
+}
+
+#ala_inf { 
+    width: 150px;
+    background-color: violet;
+    margin-top: 120px;
+    margin-left: 95px;
+    border-radius: 10px;
+    transform: rotate(25deg);
+    z-index: 110;
+    border-radius: 50px 10px 10px 30px;
+
 }
 
 .title {
-    background-color: red;
+    background-color: #5D733C;
     text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10em;
+    line-height: 0.2em;
 }
 
 .plot-div {
-    background-color: blue;
+    background-color: #F29544;
     margin: 10px;
     margin-right: 20px;
     width: 99%;
