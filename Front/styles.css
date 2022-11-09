@@ -36,6 +36,9 @@ z-index: 20;
     
 }
 
+#title {
+    display: inline-block;
+}
 
 #logo_pico_sup {
     height:35px;
